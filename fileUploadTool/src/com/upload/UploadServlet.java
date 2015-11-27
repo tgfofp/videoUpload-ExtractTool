@@ -17,15 +17,19 @@ maxFileSize = 1024 * 1024 * 10, // 10MB
 maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class UploadServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2455870336252572807L;
+
 	/**
 	 * Name of the directory where uploaded files will be saved, relative to the
 	 * web application directory.
 	 */
 	private static final String SAVE_DIR = "uploadFiles";
+
+	private static String file;
+
+	public String getFilePath() {
+		return file;
+	}
 
 	/**
 	 * handles file upload
@@ -46,6 +50,7 @@ public class UploadServlet extends HttpServlet {
 		for (Part part : request.getParts()) {
 			String fileName = extractFileName(part);
 			part.write(savePath + File.separator + fileName);
+			file = fileName;
 		}
 
 		request.setAttribute("message", "Upload has been done successfully!");

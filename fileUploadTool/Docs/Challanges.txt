@@ -1,0 +1,22 @@
+--- Lousy hotel internet => Asked nicely twice... nothing more to do :)
+
+---	Reading about how the fetch and push are working in eclipse (haven't used git for a while)
+
+--- Had a bit of trouble adding Xuggler jars: "Exception in thread "main" java.lang.UnsatisfiedLinkError: no xuggle in java.library.path
+	at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1709)" => Resolved it using Maven, new version of the API from this post: http://stackoverflow.com/questions/30002911/how-to-solve-this-error-in-my-xuggler-java-project
+	"Also it may be Xuggler related issue. Try to upgrade Xuggler to version 5.4 (from 5.2)."
+	
+--- Got a fatal exception while trying to access a file: 
+				A fatal error has been detected by the Java Runtime Environment:
+			#
+			#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000000006ee76520, pid=13968, tid=7220
+			
+			http://stackoverflow.com/questions/26379501/access-violation-in-xuggler-cannot-write-minidump
+			"The error code 0xC0000005 is an access violation, which is the native / JNI term for a NullReferenceException."
+			
+		=> After some reading and testing, I tried with a smaller(1.7MB) file downloaded from the net.
+		 This seems to have solved the issue. 
+		 TODO:Not sure why I am violating access on my file though...
+		 More MP4 videos @: http://download.wavetlan.com/SVV/Media/HTTP/http-mp4.htm
+	 
+--- 	 

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Upload</title>
 </head>
-<body>
+<body style="background-color: lightgreen">
 	<h2>${requestScope.message}</h2>
 </body>
 </html>
