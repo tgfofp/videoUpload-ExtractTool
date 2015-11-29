@@ -15,8 +15,15 @@
 			"The error code 0xC0000005 is an access violation, which is the native / JNI term for a NullReferenceException."
 			
 		=> After some reading and testing, I tried with a smaller(1.7MB) file downloaded from the net.
-		 This seems to have solved the issue. 
+		 Works ok with this one. 
 		 TODO:Not sure why I am violating access on my file though...
-		 More MP4 videos @: http://download.wavetlan.com/SVV/Media/HTTP/http-mp4.htm
+		 For More MP4 videos @: http://download.wavetlan.com/SVV/Media/HTTP/http-mp4.htm
 	 
---- 	 
+--- Learning / reading how to embed video using HTML5 ==> File formats, encoders, etc. 
+
+--- How to send Data to JSP from a Servlet  ==> ${requestScope."attribute"}
+
+--- Something is wrong with the maven: "ERROR] /C:/Users/gpaskov/git/WebProjects/fileUploadTool/src/com/upload/UploadServlet.java:[72,17] cannot find symbol
+[ERROR] symbol:   method getServletContext() "
+
+---

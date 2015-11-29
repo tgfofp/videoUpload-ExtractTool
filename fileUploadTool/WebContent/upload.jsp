@@ -9,6 +9,7 @@
 </head>
 <body style="background-color: lightgreen">
 	<center>
+		<img src="${pageContext.request.contextPath}/images/upload_button.png" />
 		<h1>Please Upload a Video File!</h1>
 		<form method="post" action="uploaded" enctype="multipart/form-data">
 			Select file to upload: <input type="file" name="file" size="60" /><br />
