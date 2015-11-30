@@ -2,6 +2,7 @@ package com.upload;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -29,38 +30,43 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String uploadDir = System.getProperty("user.home") + File.separator + "uploads";
+		String uploads = System.getProperty("user.home") + File.separator + "uploads";
 
 		// creates the save directory if it does not exists
-		File fileSaveDir = new File(uploadDir);
-		File fileSaveDir1 = new File(uploadDir + File.separator + "output");
+		File videoDir = new File(uploads);
+		File imagesDir = new File(uploads + File.separator + "output");
+		String imagesDirStr = String.valueOf(imagesDir);
 
-		if (!fileSaveDir.exists()) {
-			fileSaveDir.mkdir();
+		if (!videoDir.exists()) {
+			videoDir.mkdir();
 		} else {
-			FileUtils.cleanDirectory(fileSaveDir);
+			FileUtils.cleanDirectory(videoDir);
 		}
 
-		if (!fileSaveDir1.exists()) {
-			fileSaveDir1.mkdir();
+		if (!imagesDir.exists()) {
+			imagesDir.mkdir();
 		} else {
-			FileUtils.cleanDirectory(fileSaveDir1);
+			FileUtils.cleanDirectory(imagesDir);
 		}
 
 		String filePath = null;
 		// gets all the parts of the request and writes it
 		for (Part part : request.getParts()) {
-			String fileName = extractFileName(part);
-			filePath = uploadDir + File.separator + fileName;
+			String fileName = String.valueOf(new File(extractFileName(part)).getName());
+			filePath = uploads + File.separator + fileName;
 			part.write(filePath);
 		}
 
 		// object which creates the screenshots from a video file
-		DecodeAndCaptureFrames dacp = new DecodeAndCaptureFrames(filePath, String.valueOf(fileSaveDir1));
+		DecodeAndCaptureFrames dacp = new DecodeAndCaptureFrames(filePath, imagesDirStr);
+
+		// list of strings with the full Screenshots names
+		List<String> images = dacp.getImages();
 
 		// setting the attributes to the Servlet request
 		request.setAttribute("message", "Upload has been done successfully!");
-		request.setAttribute("filePath", uploadDir);
+		request.setAttribute("filePath", imagesDirStr);
+		request.setAttribute("images", images);
 
 		// Forwards the request data of the request to the .jsp file
 		getServletContext().getRequestDispatcher("/result.jsp").forward(request, response);

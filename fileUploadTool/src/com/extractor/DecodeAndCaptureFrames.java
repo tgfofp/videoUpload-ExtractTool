@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.image.BufferedImage;
 
 import com.xuggle.mediatool.IMediaReader;
@@ -38,6 +40,12 @@ public class DecodeAndCaptureFrames {
 
 	private static String filePrefix;
 
+	private static List<String> images;
+
+	public List<String> getImages() {
+		return images;
+	}
+
 	/**
 	 * Construct a DecodeAndCaptureFrames which reads and captures frames from a
 	 * video file.
@@ -52,7 +60,7 @@ public class DecodeAndCaptureFrames {
 
 		// create a media reader for processing video
 		IMediaReader mediaReader = ToolFactory.makeReader(filePath);
-		
+
 		mediaReader.setCloseOnEofOnly(true);
 
 		// stipulate that we want BufferedImages created in BGR 24bit color
@@ -73,17 +81,18 @@ public class DecodeAndCaptureFrames {
 			;
 	}
 
-	private static class ImageSnapListener extends MediaListenerAdapter {
+	private class ImageSnapListener extends MediaListenerAdapter {
 
 		public void onVideoPicture(IVideoPictureEvent event) {
 
 			if (event.getStreamIndex() != mVideoStreamIndex) {
 				// if the selected video stream id is not yet set, go ahead an
 				// select this lucky video stream
-				if (mVideoStreamIndex == -1)
+				if (mVideoStreamIndex == -1) {
 					mVideoStreamIndex = event.getStreamIndex();
-				// no need to show frames from this video stream
-				else
+					images = new ArrayList<>();
+					// no need to show frames from this video stream
+				} else
 					return;
 			}
 
@@ -96,6 +105,7 @@ public class DecodeAndCaptureFrames {
 			if (event.getTimeStamp() - mLastPtsWrite >= MICRO_SECONDS_BETWEEN_FRAMES) {
 
 				String outputFilename = dumpImageToFile(event.getImage());
+				images.add(outputFilename);
 
 				// indicate file written
 				double seconds = ((double) event.getTimeStamp()) / Global.DEFAULT_PTS_PER_SECOND;
