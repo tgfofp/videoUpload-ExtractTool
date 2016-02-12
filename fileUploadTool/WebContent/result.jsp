@@ -12,8 +12,11 @@
 	<br />
 	<center>
 
-		<video src="C:\Users\gpaskov\uploads\test1.mp4" width="320"
-			height="280" controls>
+		<video controls autoplay width="512" height="288"> 
+			 <source src="<c:url value="/video.m4v" />"> </source>
+		</video>
+
+
 		<p>Your browser does not support the HTML5 video element.</p>
 		</video>
 

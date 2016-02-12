@@ -65,7 +65,7 @@ public class UploadServlet extends HttpServlet {
 
 		// setting the attributes to the Servlet request
 		request.setAttribute("message", "Upload has been done successfully!");
-		request.setAttribute("filePath", imagesDirStr);
+		request.setAttribute("video", filePath);
 		request.setAttribute("images", images);
 
 		// Forwards the request data of the request to the .jsp file

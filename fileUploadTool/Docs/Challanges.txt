@@ -23,7 +23,7 @@
 
 --- How to send Data to JSP from a Servlet  ==> ${requestScope."attribute"}
 
---- Something is wrong with the maven: "ERROR] /C:/Users/gpaskov/git/WebProjects/fileUploadTool/src/com/upload/UploadServlet.java:[72,17] cannot find symbol
+--- Something is wrong with maven: "ERROR] /C:/Users/gpaskov/git/WebProjects/fileUploadTool/src/com/upload/UploadServlet.java:[72,17] cannot find symbol
 [ERROR] symbol:   method getServletContext() "
 
 ---
